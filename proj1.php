@@ -39,12 +39,24 @@
 </form>
 
   <!-- creating the containers for the results -->
-  <article class="All Stores">
-    <article class="store"> <?php
-      echo this is amazon
-      ?> </article>
-    <article class="store"> this is target </article>
-    <article class="store"> this is walmart </article>
+    <article class="All Stores">
+
+        <!-- amazon section -->
+        <article class="store"> <?php
+        echo "this is amazon";
+        ?> </article>
+
+
+        <!-- target section -->
+        <article class="store"> <?php
+        echo "this is target";
+        ?> </article> 
+
+        <!-- walmart section -->
+        <article class="store"> <?php
+        echo "this is walmart";
+        ?> </article>
+      
   </article>
 
 </body>
