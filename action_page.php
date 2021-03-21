@@ -1,24 +1,17 @@
 <?php
 
-/* Enter the Amazon Product ISIN */
-$amazonISIN = "B00OTWNSMM";
+$product_name = $_GET(name);
 
-/* Grab the content of the HTML web page */
-$html = file_get_contents("http://www.amazon.com/gp/aw/d/$amazonISIN");
 
-/* Clean-up */
-$html = str_replace("&nbsp;", "", $html);
+// amazon
+$a_html = file_get_contents("http://www.amazon.com/s?k=" + $a_product_name +"&ref=nb_sb_noss");
 
-/* The magical regex for extracting the price */
-$regex = '/\(Prezzo|Precio|Price|Prix Amazon|Preis):?\<\/b\>([^\<]+)/i';
+$a_regex = '/\(Prezzo|Precio|Price|Prix Amazon|Preis):?\<\/b\>([^\<]+)/i';
 
-/* Return the price */
-
-if (preg_match($regex, $html, $price)) {
+if (preg_match($a_regex, $a_html, $price)) {
     $price = number_format((float)($price[2]/100), 2, '.', '');
-    echo "The price for amazon.com/dp/$amazonISIN is $price";
-} else {
-    echo "Sorry, the item is out-of-stock on Amazon";
+     echo "The price for amazon is $price";
 }
+
 
 ?>

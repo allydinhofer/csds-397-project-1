@@ -42,7 +42,8 @@
 
   <!-- creating the containers for the results -->
     <article class="All Stores">
-        <?php
+        <!-- walmart section -->
+        <article class="store"> <?php
         echo "this is amazon";
         ?> </article>
 
