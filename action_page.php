@@ -1,6 +1,6 @@
 <?php
 
-$product_name = $_GET(name);
+
 
 
 // amazon
