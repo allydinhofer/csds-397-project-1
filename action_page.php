@@ -1,16 +1,50 @@
-<?php
+<!DOCTYPE html>
+<html>
+<head>
+     <style>
+        .all-stores {
+          margin: 0;
+          padding: 5px;
+          background-color: lightgray;
+        }
+        
+        .all-stores > h1, .store {
+          margin: 10px;
+          padding: 5px;
+        }
+        
+        .store {
+          background: white;
+        }
+        
+        .store > h2, p {
+          margin: 4px;
+          font-size: 90%;
+        }
+        </style>
+        </head>
+    <h1 style="color: darkblue;"> Here are your results: </h1>
+<body style="background-color:lightgray;">
+    <?php $product_name = $_GET["search"]; ?>
+        <!-- creating the containers for the results -->
+        <article class="All Stores">
+            <!-- amazon section -->
+            <article class="store"> <?php
+                /* Grab the content of the HTML web page */
+                $html = file_get_contents("https://www.amazon.com/s?k=$product_name");
+                echo "this is amazon";
+            ?> </article>
 
-$product_name = $_GET["search"];
+            <!-- target section -->
+            <article class="store"> <?php
+                echo "this is target";
+            ?> </article> 
 
-// amazon
-$a_html = file_get_contents("http://www.amazon.com/s?k=" + $product_name +"&ref=nb_sb_noss");
-
-$a_regex = '/\(Prezzo|Precio|Price|Prix Amazon|Preis):?\<\/b\>([^\<]+)/i';
-
-if (preg_match($a_regex, $a_html, $price)) {
-    $price = number_format((float)($price[2]/100), 2, '.', '');
-     echo "The price for amazon is $price";
-}
-
-
-?>
+            <!-- walmart section -->
+            <article class="store"> <?php
+                echo "this is walmart";
+            ?> </article>
+      
+        </article>
+</body>
+</html>
