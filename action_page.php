@@ -31,18 +31,21 @@
             <!-- amazon section -->
             <article class="store"> <?php
                 /* Grab the content of the HTML web page */
-                $html = file_get_contents("https://www.amazon.com/s?k=$product_name");
-                echo "this is amazon";
+                $amazon = file_get_contents("https://www.amazon.com/s?k=$product_name");
+                $regex = "price is";
+                $a_arr =preg_split($regex,$amazon);
+                echo $a_arr;
+
             ?> </article>
 
             <!-- target section -->
             <article class="store"> <?php
-                echo "this is target";
+                $target = file_get_contents("https://www.target.com/s?searchTerm=$product_name");
             ?> </article> 
 
             <!-- walmart section -->
             <article class="store"> <?php
-                echo "this is walmart";
+                $walmart = file_get_contents("https://www.walmart.com/search/?query=$product_name");
             ?> </article>
       
         </article>
