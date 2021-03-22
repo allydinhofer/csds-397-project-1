@@ -38,14 +38,13 @@
 <form class="example" action="action_page.php">
     <input type="text" placeholder="Search for your item here" name="search">
     <button type="submit"><i class="fa fa-search"></i></button>
-    <?php $product_name = $_GET(name); ?>
 </form>
 
   <!-- creating the containers for the results -->
     <article class="All Stores">
-        <!-- walmart section -->
+        <!-- amazon section -->
         <article class="store"> <?php
-        echo "this is amazon";
+            echo "this is amazon";
         ?> </article>
 
 

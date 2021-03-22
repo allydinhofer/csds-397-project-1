@@ -1,10 +1,9 @@
 <?php
 
-
-
+$product_name = $_GET["search"];
 
 // amazon
-$a_html = file_get_contents("http://www.amazon.com/s?k=" + $a_product_name +"&ref=nb_sb_noss");
+$a_html = file_get_contents("http://www.amazon.com/s?k=" + $product_name +"&ref=nb_sb_noss");
 
 $a_regex = '/\(Prezzo|Precio|Price|Prix Amazon|Preis):?\<\/b\>([^\<]+)/i';
 
