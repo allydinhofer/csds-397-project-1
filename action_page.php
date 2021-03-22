@@ -32,9 +32,12 @@
             <article class="store"> <?php
                 /* Grab the content of the HTML web page */
                 $amazon = file_get_contents("https://www.amazon.com/s?k=$product_name");
-                $regex = "price is";
-                $a_arr =preg_split($regex,$amazon);
-                echo $a_arr;
+                for($i=0; $i <= sizeof($amazon); $i++) {
+                    if ($amazon[$i] == "p" && $amazon[$i+1] == "r" && $amazon[$i+2] == "i" && $amazon[$i+3] == "c" && $amazon[$i+4] == "c" && $amazon[$i+5] == "e" 
+                    && $amazon[$i+6] == " " && $amazon[$i+7] == "o" && $amazon[$i+8] == "f" && $amazon[$i+9] == " ") {
+                        echo "The price on amazon is: " + amazon[$i+10] + amazon[$i+11] + amazon[$i+12] + amazon[$i+13] + amazon[$i+15] + amazon[$i+16];
+                    }
+                }
 
             ?> </article>
 
