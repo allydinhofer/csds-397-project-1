@@ -32,8 +32,10 @@
             <article class="store"> <?php
                 $amazon = file_get_contents("https://www.amazon.com/s?k=$product_name");
                 for ($i=0; $i < strlen($amazon); $i++) {
-                    if ($amazon[$i-1] == ' ' && $amazon[$i] == 'P' && $amazon[$i+1] == 'r' && $amazon[$i+2] == 'i' && $amazon[$i+3] == 'c' && $amazon[$i+4] == 'e' && $amazon[$i+5] == ' ')  {
-                        echo "The price on Amazon is " . $amazon[$i+6] . $amazon[$i+7] . $amazon[$i+8] . $amazon[$i+9] . $amazon[$i+10];
+                    if ($amazon[$i] == 'C' && $amazon[$i+1] == 'u' && $amazon[$i+2] == 'r' && $amazon[$i+3] == 'r' && $amazon[$i+4] == 'e' && $amazon[$i+5] == 'n'
+                    && $amazon[$i+6] == 't' && $amazon[$i+7] == ' ' && $amazon[$i+8] == 'p' && $amazon[$i+9] == 'r' && $amazon[$i+10] == 'i'
+                    && $amazon[$i+11] == 'c' && $amazon[$i+12] == 'e' && $amazon[$i+13] == ' ' && $amazon[$i+14] == 'i' && $amazon[$i+15] == 's')  {
+                        echo "The price on amazon is " . $amazon[$i+17] . $amazon[$i+18] . $amazon[$i+19] . $amazon[$i+20] . $amazon[$i+22];
                         break;
                     } 
                 }
@@ -43,13 +45,12 @@
             <article class="store"> <?php
                 $target = file_get_contents("https://www.target.com/s?searchTerm=$product_name");
                 for ($i=0; $i < strlen($target); $i++) {
-                    if ($target[$i] == 'P' && $target[$i+1] == 'r' && $target[$i+2] == 'i' && $target[$i+3] == 'c' && $target[$i+4] == 'e' && $target[$i+5] == ' ')  {
-                        echo "The price on Target is " . $target[$i+2] . $target[$i+3] . $target[$i+4] . $target[$i+5] . $target[$i+6];
-                       // echo "found";
-                        break;
-                    }
+                 /*   if ($target[$i] == ' ' && $target[$i+1] == '$') {
+                    //   echo "The price on Target is " . $target[$i+1]; // . $target[$i+2] . $target[$i+3]; // . $target[$i+4] . $target[$i+5];
+                    echo $target[$i+1];
+                    break;   
+                    } */
                 }
-               // echo "The item is out of stock on Target";
             ?>
             </article> 
 
