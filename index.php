@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<!-- note to self: run php -S 127.0.0.1:8080 in terminal to start server -->
+<!-- note: run php -S 127.0.0.1:8080 in terminal to start server -->
 <html>
 <body>
 

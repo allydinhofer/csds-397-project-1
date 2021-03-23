@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- this page is brought up when you submit the search button -->
+     
+     <!-- formatting the page -->
      <style>
         .all-stores {
           margin: 0;
@@ -30,8 +33,11 @@
         <article class="All Stores">
             <!-- amazon section -->
             <article class="store"> <?php
+                // accessing the HTML and intializing the empty variable for the price
                 $amazon = file_get_contents("https://www.amazon.com/s?k=$product_name");
                 $a_price = " ";
+
+                // finding the place in the HTML where the price is (follows "Current price is")
                 for ($i=0; $i < strlen($amazon); $i++) {
                     if ($amazon[$i] == 'C' && $amazon[$i+1] == 'u' && $amazon[$i+2] == 'r' && $amazon[$i+3] == 'r' && $amazon[$i+4] == 'e' && $amazon[$i+5] == 'n'
                     && $amazon[$i+6] == 't' && $amazon[$i+7] == ' ' && $amazon[$i+8] == 'p' && $amazon[$i+9] == 'r' && $amazon[$i+10] == 'i'
@@ -40,6 +46,8 @@
                         break;
                     } 
                 }
+                
+                // returning the price or a note stating the item is out of stock
                 if ($a_price == " ") {
                     echo "This item is out of stock at Amazon.";
                 } else {
@@ -49,14 +57,19 @@
             </article>
             <!-- target section -->
             <article class="store"> <?php
+                // accessing the HTML and intializing the empty variable for the price
                 $target = file_get_contents("https://www.target.com/s?searchTerm=$product_name");
                 $t_price = " ";
+                
+                // finding the place in the HTML where the price is (follows "$")
                 for ($i=0; $i < strlen($target); $i++) {
                    if ($target[$i] == '$' && $target[$i-1] != "*") {
                      $t_price = "The price at Target is $" . $target[$i+1] . $target[$i+2]; 
                     break;   
                     } 
                 }
+
+                // returning the price or a note stating the item is out of stock
                 if ($t_price == " ") {
                     echo "This item is out of stock at Target.";
                 } else {
@@ -68,14 +81,19 @@
 
             <!-- walmart section -->
             <article class="store"> <?php
+                // accessing the HTML and intializing the empty variable for the price
                 $walmart = file_get_contents("https://www.walmart.com/search/?query=$product_name");
                 $w_price = " ";
+                
+                // finding the place in the HTML where the price is (surrounds ".")
                 for ($i=0; $i < strlen($walmart); $i++) {
                     if ($walmart[$i] == '.') {
                         $w_price ="The price at Walmart is $" . $walmart[$i-2] . $walmart[$i-1] . $walmart[$i] . $walmart[$i+1] . $walmart[$i+2];
                         break;
                     } 
                 }
+
+                // returning the price or a note stating the item is out of stock
                 if ($w_price == " ") {
                     echo "This item is out of stock at Walmart.";
                 } else {
