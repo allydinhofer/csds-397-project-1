@@ -30,20 +30,15 @@
         <article class="All Stores">
             <!-- amazon section -->
             <article class="store"> <?php
-                /* Grab the content of the HTML web page */
+                // Grab the content of the HTML web page
                 $amazon = file_get_contents("https://www.amazon.com/s?k=$product_name");
-                for($i=0; $i <= strlen($amazon); $i++) {
-                    if ($amazon[$i] == "p" && $amazon[$i+1] == "r" && $amazon[$i+2] == "i" && $amazon[$i+3] == "c" && $amazon[$i+4] == "c" && $amazon[$i+5] == "e" 
-                    && $amazon[$i+6] == " " && $amazon[$i+7] == "o" && $amazon[$i+8] == "f" && $amazon[$i+9] == " ") {
-                        echo "The price on amazon is: " + amazon[$i+10] + amazon[$i+11] + amazon[$i+12] + amazon[$i+13] + amazon[$i+15] + amazon[$i+16];
-                    }
-                }
-
-            ?> </article>
-
+            ?> 
+            The amazon URL is https://www.amazon.com/s?k= <?php echo $product_name ?> 
+            </article>
             <!-- target section -->
             <article class="store"> <?php
                 $target = file_get_contents("https://www.target.com/s?searchTerm=$product_name");
+                // need to get it to select the first item and then get it's price
             ?> </article> 
 
             <!-- walmart section -->
