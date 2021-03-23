@@ -30,36 +30,16 @@
         <article class="All Stores">
             <!-- amazon section -->
             <article class="store"> <?php
-                $amazon = "https://www.amazon.com/s?k=$product_name";
-                $doc = new DOMDocument();
-                $doc->loadHTML($amazon);
-                $result = array();
-                $a = $doc->getElementsByTagName('a')->item(0);
-                try {
-                    if (($a->item(0) && $a->item(0)->hasAttributes())) {
-                        foreach ($a->attributes as $attr) {
-                            $name = $attr->nodeName;
-                            $value = $attr->nodeValue;    
-                            $result[$name] = $value;
-                        }
-                    } 
-                } catch (Exception $e) {
-                    echo "Sorry, the item is out-of-stock on Amazon";
-                }
-                $first_result_amazon = file_get_contents($result[0]);
-                $first_result_amazon = str_replace("&nbsp;", "", $first_result_amazon);
-                $regex = '/\(Prezzo|Precio|Price|Prix Amazon|Preis):?\<\/b\>([^\<]+)/i';
-
-                if (preg_match($regex, $first_result_amazon, $price)) {
-                    $price = number_format((float)($price[2]/100), 2, '.', '');
-                    echo "$product_name is $price";
-                } else {
-                    echo "Sorry, the item is out-of-stock on Amazon";
+                $amazon = file_get_contents("https://www.amazon.com/s?k=$product_name");
+                for ($i=0; $i < strlen($amazon); $i++) {
+                    if ($amazon[$i-1] == ' ' && $amazon[$i] == 'P' && $amazon[$i+1] == 'r' && $amazon[$i+2] == 'i' && $amazon[$i+3] == 'c' && $amazon[$i+4] == 'e' && $amazon[$i+5] == ' ')  {
+                        echo "The price on amazon is " . $amazon[$i+6] . $amazon[$i+7] . $amazon[$i+8] . $amazon[$i+9] . $amazon[$i+10];
+                        break;
+                    }
                 }
 
 
             ?> 
-            <a href=<?php echo $amazon?>>Amazon result for <?php echo $product_name ?> </a>
             </article>
             <!-- target section -->
             <article class="store"> <?php
