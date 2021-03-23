@@ -31,27 +31,36 @@
             <!-- amazon section -->
             <article class="store"> <?php
                 $amazon = file_get_contents("https://www.amazon.com/s?k=$product_name");
+                $a_price = " ";
                 for ($i=0; $i < strlen($amazon); $i++) {
                     if ($amazon[$i] == 'C' && $amazon[$i+1] == 'u' && $amazon[$i+2] == 'r' && $amazon[$i+3] == 'r' && $amazon[$i+4] == 'e' && $amazon[$i+5] == 'n'
                     && $amazon[$i+6] == 't' && $amazon[$i+7] == ' ' && $amazon[$i+8] == 'p' && $amazon[$i+9] == 'r' && $amazon[$i+10] == 'i'
                     && $amazon[$i+11] == 'c' && $amazon[$i+12] == 'e' && $amazon[$i+13] == ' ' && $amazon[$i+14] == 'i' && $amazon[$i+15] == 's')  {
-                        echo "The price on amazon is " . $amazon[$i+17] . $amazon[$i+18] . $amazon[$i+19] . $amazon[$i+20] . $amazon[$i+22];
+                        $a_price = "The price at Amazon is " . $amazon[$i+17] . $amazon[$i+18] . $amazon[$i+19] . $amazon[$i+20] . $amazon[$i+22];
                         break;
                     } 
+                }
+                if ($a_price == " ") {
+                    echo "This item is out of stock at Amazon.";
+                } else {
+                    echo $a_price;
                 }
             ?> 
             </article>
             <!-- target section -->
             <article class="store"> <?php
                 $target = file_get_contents("https://www.target.com/s?searchTerm=$product_name");
+                $t_price = " ";
                 for ($i=0; $i < strlen($target); $i++) {
-                   if ($target[$i] == '$' && ($target[$i+1] == '.' || $target[$i+2] == '.' )) {
-                    // echo "The price on Target is $" . $target[$i+1] . $target[$i+2] . $target[$i+3] . $target[$i+4] . $target[$i+5];
-                    // echo $target[$i+1];
-                    echo "found";
+                   if ($target[$i] == '$' && $target[$i-1] != "*") {
+                     $t_price = "The price at Target is $" . $target[$i+1] . $target[$i+2]; 
                     break;   
                     } 
-                    // looking for $__.__
+                }
+                if ($t_price == " ") {
+                    echo "This item is out of stock at Target.";
+                } else {
+                    echo $t_price;
                 }
 
             ?>
@@ -60,11 +69,17 @@
             <!-- walmart section -->
             <article class="store"> <?php
                 $walmart = file_get_contents("https://www.walmart.com/search/?query=$product_name");
+                $w_price = " ";
                 for ($i=0; $i < strlen($walmart); $i++) {
-                    if ($walmart[$i] == '.') { // && $walmart[$i+1] == 'i' && $walmart[$i+2] == 'd' && $walmart[$i+3] == 'd' && $walmart[$i+4] == 'e' && $walmart[$i+5] == 'n') {
-                        echo "The price on Walmart is $".$walmart[$i-2] . $walmart[$i-1] . $walmart[$i] . $walmart[$i+1] . $walmart[$i+2];
+                    if ($walmart[$i] == '.') {
+                        $w_price ="The price at Walmart is $" . $walmart[$i-2] . $walmart[$i-1] . $walmart[$i] . $walmart[$i+1] . $walmart[$i+2];
                         break;
                     } 
+                }
+                if ($w_price == " ") {
+                    echo "This item is out of stock at Walmart.";
+                } else {
+                    echo $w_price;
                 }
             ?>
             </article>
