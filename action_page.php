@@ -32,21 +32,23 @@
             <article class="store"> <?php
                 $amazon = "https://www.amazon.com/s?k=$product_name";
                 $doc = new DOMDocument();
-                libxml_use_internal_errors(true);
-                $dom->loadHTML($amazon);
+                $doc->loadHTML($amazon);
                 $result = array();
-                $a = $dom->getElementsByTagName('a')->item(0);
-                if ($a->hasAttributes()) {
-                    foreach ($a->attributes as $attr) {
-                        $name = $attr->nodeName;
-                        $value = $attr->nodeValue;    
-                        $result[$name] = $value;
-                    }
+                $a = $doc->getElementsByTagName('a')->item(0);
+                try {
+                    if (($a->item(0) && $a->item(0)->hasAttributes())) {
+                        foreach ($a->attributes as $attr) {
+                            $name = $attr->nodeName;
+                            $value = $attr->nodeValue;    
+                            $result[$name] = $value;
+                        }
+                    } 
+                } catch (Exception $e) {
+                    echo "Sorry, the item is out-of-stock on Amazon";
                 }
                 $first_result_amazon = file_get_contents($result[0]);
                 $first_result_amazon = str_replace("&nbsp;", "", $first_result_amazon);
                 $regex = '/\(Prezzo|Precio|Price|Prix Amazon|Preis):?\<\/b\>([^\<]+)/i';
-                /* Return the price */
 
                 if (preg_match($regex, $first_result_amazon, $price)) {
                     $price = number_format((float)($price[2]/100), 2, '.', '');
