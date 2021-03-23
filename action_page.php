@@ -45,12 +45,15 @@
             <article class="store"> <?php
                 $target = file_get_contents("https://www.target.com/s?searchTerm=$product_name");
                 for ($i=0; $i < strlen($target); $i++) {
-                 /*   if ($target[$i] == ' ' && $target[$i+1] == '$') {
-                    //   echo "The price on Target is " . $target[$i+1]; // . $target[$i+2] . $target[$i+3]; // . $target[$i+4] . $target[$i+5];
-                    echo $target[$i+1];
+                   if ($target[$i] == '$' && ($target[$i+1] == '.' || $target[$i+2] == '.' )) {
+                    // echo "The price on Target is $" . $target[$i+1] . $target[$i+2] . $target[$i+3] . $target[$i+4] . $target[$i+5];
+                    // echo $target[$i+1];
+                    echo "found";
                     break;   
-                    } */
+                    } 
+                    // looking for $__.__
                 }
+
             ?>
             </article> 
 
@@ -58,11 +61,10 @@
             <article class="store"> <?php
                 $walmart = file_get_contents("https://www.walmart.com/search/?query=$product_name");
                 for ($i=0; $i < strlen($walmart); $i++) {
-                    if ($walmart[$i] == '$') { //  && $walmart[$i+1] == 'r' && $walmart[$i+2] == 'i' && $walmart[$i+2] == 'c' && $walmart[$i+2] == 'e') {
-                      //  echo "found";
-                      //  echo "The price on Walmart is " . $walmart[$i] . $walmart[$i+1] . $walmart[$i+2] . $walmart[$i+3] . $walmart[$i+4];
-                    //    break;
-                    }
+                    if ($walmart[$i] == '.') { // && $walmart[$i+1] == 'i' && $walmart[$i+2] == 'd' && $walmart[$i+3] == 'd' && $walmart[$i+4] == 'e' && $walmart[$i+5] == 'n') {
+                        echo "The price on Walmart is $".$walmart[$i-2] . $walmart[$i-1] . $walmart[$i] . $walmart[$i+1] . $walmart[$i+2];
+                        break;
+                    } 
                 }
             ?>
             </article>
