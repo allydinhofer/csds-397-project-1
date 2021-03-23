@@ -31,20 +31,23 @@
             <!-- amazon section -->
             <article class="store"> <?php
                 // Grab the content of the HTML web page
-                $amazon = file_get_contents("https://www.amazon.com/s?k=$product_name");
+                $amazon = "https://www.amazon.com/s?k=$product_name";
             ?> 
-            The amazon URL is https://www.amazon.com/s?k= <?php echo $product_name ?> 
+            <a href=<?php echo $amazon?>>Amazon result for <?php echo $product_name ?> </a>
             </article>
             <!-- target section -->
             <article class="store"> <?php
-                $target = file_get_contents("https://www.target.com/s?searchTerm=$product_name");
-                // need to get it to select the first item and then get it's price
-            ?> </article> 
+                $target = "https://www.target.com/s?searchTerm=$product_name";
+            ?>
+            <a href=<?php echo $target?>>Target result for <?php echo $product_name ?> </a>    
+            </article> 
 
             <!-- walmart section -->
             <article class="store"> <?php
-                $walmart = file_get_contents("https://www.walmart.com/search/?query=$product_name");
-            ?> </article>
+                $walmart = "https://www.walmart.com/search/?query=$product_name";
+            ?>
+            <a href=<?php echo $walmart?>>Walmart result for <?php echo $product_name ?> </a> 
+            </article>
       
         </article>
 </body>
