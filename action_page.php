@@ -48,11 +48,11 @@
                 }
                 
                 // returning the price or a note stating the item is out of stock
-                if ($a_price == " ") {
-                    echo "This item is out of stock at Amazon.";
-                } else {
+              //  if ($a_price == " ") {
+                  //  echo "This item is out of stock at Amazon.";
+              //  } else {
                     echo $a_price;
-                }
+              //  }
             ?> 
             </article>
             <!-- target section -->
