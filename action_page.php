@@ -35,24 +35,16 @@
             <article class="store"> <?php
                 // accessing the HTML and intializing the empty variable for the price
                 $amazon = file_get_contents("https://www.amazon.com/s?k=$product_name");
-                $a_price = " ";
 
                 // finding the place in the HTML where the price is (follows "Current price is")
                 for ($i=0; $i < strlen($amazon); $i++) {
                     if ($amazon[$i] == 'C' && $amazon[$i+1] == 'u' && $amazon[$i+2] == 'r' && $amazon[$i+3] == 'r' && $amazon[$i+4] == 'e' && $amazon[$i+5] == 'n'
                     && $amazon[$i+6] == 't' && $amazon[$i+7] == ' ' && $amazon[$i+8] == 'p' && $amazon[$i+9] == 'r' && $amazon[$i+10] == 'i'
                     && $amazon[$i+11] == 'c' && $amazon[$i+12] == 'e' && $amazon[$i+13] == ' ' && $amazon[$i+14] == 'i' && $amazon[$i+15] == 's')  {
-                        $a_price = "The price at Amazon is " . $amazon[$i+17] . $amazon[$i+18] . $amazon[$i+19] . $amazon[$i+20] . $amazon[$i+22];
+                        echo "The price at Amazon is " . $amazon[$i+17] . $amazon[$i+18] . $amazon[$i+19] . $amazon[$i+20] . $amazon[$i+22];
                         break;
                     } 
                 }
-                
-                // returning the price or a note stating the item is out of stock
-              //  if ($a_price == " ") {
-                  //  echo "This item is out of stock at Amazon.";
-              //  } else {
-                    echo $a_price;
-              //  }
             ?> 
             </article>
             <!-- target section -->
@@ -63,9 +55,9 @@
                 
                 // finding the place in the HTML where the price is (follows "$")
                 for ($i=0; $i < strlen($target); $i++) {
-                   if ($target[$i] == '$' && $target[$i-1] != "*") {
-                     $t_price = "The price at Target is $" . $target[$i+1] . $target[$i+2]; 
-                    break;   
+                    if ($target[$i] == '$' && $target[$i-1] != "*") {
+                    $t_price = "The price at Target is $" . $target[$i+1] . "." . $target[$i+2]; 
+                       break;   
                     } 
                 }
 
@@ -75,7 +67,6 @@
                 } else {
                     echo $t_price;
                 }
-
             ?>
             </article> 
 
